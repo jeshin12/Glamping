@@ -1,0 +1,72 @@
+
+ html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      margin: 0;
+    }
+
+    #container {
+      width: 100%;
+      height: 100%;
+    }
+
+    .video-popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 9999;
+    }
+   #container canvas {
+    cursor: pointer;
+  }
+
+  /* Add this to your existing CSS or in a new style tag or file */
+
+  
+  
+  .booking-button-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1002;
+  }
+
+  .round-booking-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3498db;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .round-booking-button:hover {
+    background-color: #2980b9;
+  }
+
+  @media screen and (max-width: 768px) {
+    .round-booking-button {
+      padding: 12px 20px;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    .round-booking-button {
+      padding: 10px 15px;
+      font-size: 14px;
+    }
+  }
+  
+
+

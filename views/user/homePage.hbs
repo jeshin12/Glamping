@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet">
+    <link rel="stylesheet" href="/public/stylesheets/style.css">
+   
+    
+    
+
+<!-- Css Styles -->
+<link rel="stylesheet" href="/assets/css/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/font-awesome.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/elegant-icons.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/jquery-ui.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/magnific-popup.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/owl.carousel.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/slicknav.min.css" type="text/css">
+<link rel="stylesheet" href="/assets/css/style.css" type="text/css">
+
+ <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .header {
+      position: fixed; /* Change to fixed to keep it fixed at the top */
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1001; /* Set a higher z-index to ensure it stays above panorama */
+    }
+
+    #container {
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  </style>
+ 
+</head>
+
+<body>
+
+    <!-- Google Font -->
+    {{!-- navbar --}}
+
+<!-- Offcanvas Menu Begin -->
+<div class="offcanvas-menu-overlay"></div>
+<div class="offcanvas-menu-wrapper">
+    <div class="offcanvas__close">+</div>
+   
+    
+    <div id="mobile-menu-wrap"></div>
+   
+</div>
+<!-- Offcanvas Menu End -->
+
+
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-xl-3 col-lg-2">
+                <div class="header__logo">
+                    <h3><b>GLAMPING</b> </h3>
+                </div>
+            </div>
+            <div class="col-xl-6 col-lg-7 ml-auto">
+                <nav class="header__menu">
+                    <ul class="nav-list">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/">About Us</a></li>
+                        <li><a href="/">Accommodation</a></li>
+                        <li><a href="/">Activity</a></li>
+                        <li><a href="/">Contact Us</a></li>
+                       
+                
+                    </ul>
+                </nav>
+            </div>
+            <div class="canvas__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+
+
+{{!-- navbar ends --}}
+
+
+
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/three.js/105/three.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/panolens@0.11.0/build/panolens.min.js"></script>
+
+  <div id="container"></div>
+
+
+ 
+
+   <!-- Booking Button -->
+  <div class="booking-button-container">
+    <a href="/booking" class="round-booking-button">BOOK NOW</a>
+  </div>
+
+  <!-- Video Popup -->
+  <div id="videoPopup" class="video-popup">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/O-aH0vUfN00?autoplay=1" frameborder="0"
+      allowfullscreen></iframe>
+  </div>
+
+ 
+ 
+
+<script>
+ 
+    var panorama,panorama2,panorama3, viewer, container, infospot, infospot2,infospotPositions;
+
+    container = document.querySelector('#container');
+  
+    panorama = new PANOLENS.ImagePanorama('./images/panorama.jpg');
+    panorama2 = new PANOLENS.ImagePanorama('./images/panorama2.jpg');
+    panorama3 = new PANOLENS.ImagePanorama('./images/panoImage.jpeg');
+   
+   var scalingFactor = 3; // Adjust this value based on your needs
+
+var infospotPositions = [
+    new THREE.Vector3(-1370.06 * scalingFactor, 16.30 * scalingFactor, -790.14 * scalingFactor),
+    new THREE.Vector3(250.06 * scalingFactor, 30.30 * scalingFactor, 2790.14 * scalingFactor),
+    new THREE.Vector3(250.06 * scalingFactor, 30.30 * scalingFactor, 2790.14 * scalingFactor)
+];
+
+
+    infospot = new PANOLENS.Infospot(150, PANOLENS.DataImage.Info);
+    infospot.position.set(-4000, 400, 1200);
+    infospot.addHoverText('jeshin');
+    infospot.addEventListener('hoverenter', function () {
+        showVideoPopup();
+    });
+    infospot.addEventListener('hoverleave', function () {
+        hideVideoPopup();
+    });
+
+    infospot2 = new PANOLENS.Infospot(150, PANOLENS.DataImage.Info);
+    infospot2.position.set(2000, 100, 2000);
+    infospot2.addHoverText('ritha');
+    infospot2.addEventListener('hoverenter', function () {
+        showVideoPopup();
+    });
+    infospot2.addEventListener('hoverleave', function () {
+        hideVideoPopup();
+    });
+
+    panorama.add(infospot, infospot2);
+
+    viewer = new PANOLENS.Viewer({
+        container: container,
+        autoRotate: true,
+        autoRotateSpeed: 0.3,
+          controlBar: false
+    });
+
+    panorama.link(panorama2,infospotPositions[0]);
+    panorama2.link(panorama3,infospotPositions[1])
+
+     panorama3.link(panorama,infospotPositions[2])
+
+    viewer.add(panorama,panorama2,panorama3);
+
+    function showVideoPopup() {
+        document.getElementById('videoPopup').style.display = 'block';
+    }
+
+    function hideVideoPopup() {
+        document.getElementById('videoPopup').style.display = 'none';
+    }
+    
+</script>
+<script src="/assets/js/jquery-3.3.1.min.js"></script>
+<script src="/assets/js/bootstrap.min.js"></script>
+<script src="/assets/js/jquery.magnific-popup.min.js"></script>
+<script src="/assets/js/jquery-ui.min.js"></script>
+<script src="/assets/js/mixitup.min.js"></script>
+<script src="/assets/js/jquery.countdown.min.js"></script>
+<script src="/assets/js/jquery.slicknav.js"></script>
+<script src="/assets/js/owl.carousel.min.js"></script>
+<script src="/assets/js/jquery.nicescroll.min.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+
+</html>
